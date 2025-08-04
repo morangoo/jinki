@@ -1,18 +1,35 @@
 "use client";
+
 import { createContext, useContext, useState, ReactNode } from "react";
+import { themes, ThemeType } from "./themes";
 
 type ThemeContextType = {
-  theme: string;
-  setTheme: (theme: string) => void;
+  theme: ThemeType;
+  setTheme: (theme: ThemeType) => void;
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setTheme] = useState(() => {
-    // Initialize theme from sessionStorage or default to a random theme
-    const themes = ["corporate", "manga"];
-    return themes[Math.floor(Math.random() * themes.length)];
+type ThemeProviderProps = {
+  children: ReactNode;
+};
+
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  function getDeviceMode() {
+    if (typeof window === "undefined") return "any";
+    const width = window.innerWidth;
+    return width <= 768 ? "mobile" : "desktop";
+  }
+
+  const [theme, setTheme] = useState<ThemeType>(() => {
+    let mode = "any";
+    if (typeof window !== "undefined") {
+      const width = window.innerWidth;
+      mode = width <= 768 ? "mobile" : "desktop";
+    }
+    const filtered = themes.filter(t => t.mode === mode || t.mode === "any");
+    if (filtered.length === 0) return themes[0].name;
+    return filtered[Math.floor(Math.random() * filtered.length)].name as ThemeType;
   });
 
   return (
