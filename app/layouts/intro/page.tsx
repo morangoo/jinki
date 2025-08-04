@@ -1,5 +1,5 @@
 "use client";
-export default function IntroPage({ onClose }: { onClose: () => void }) {
+export function IntroPage({ onClose }: { onClose: () => void }) {
   return (
     <div>
       <h1>Welcome</h1>

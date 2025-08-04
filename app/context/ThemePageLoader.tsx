@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useTheme } from "@/app/context/ThemeContext";
+import Image from "next/image";
 
 type Props = {
   route: string;
@@ -40,7 +41,7 @@ export default function ThemedPageLoader({ route }: Props) {
           width: "100vw",
         }}
       >
-        <img
+        <Image
           src="https://avatars.githubusercontent.com/u/171176624?v=4"
           alt="Loading"
           className="img-spin"

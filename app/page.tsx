@@ -1,7 +1,7 @@
 "use client";
 
 import ThemedPageLoader from "@/app/context/ThemePageLoader";
-import IntroPage from "@/app/layouts/intro/page";
+import { IntroPage } from "@/app/layouts/intro/page";
 import { useEffect, useState } from "react";
 
 export default function Page() {
