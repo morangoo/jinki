@@ -11,17 +11,10 @@ export default function TopBar() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [x, setX] = React.useState(0);
-  const [contentWidth, setContentWidth] = React.useState(0);
-
-  React.useEffect(() => {
-    if (contentRef.current) {
-      setContentWidth(contentRef.current.offsetWidth);
-    }
-  }, []);
 
   useAnimationFrame(() => {
     setX((prev) => {
-      let next = prev - 1.2;
+      const next = prev - 1.2;
       return next;
     });
   });
