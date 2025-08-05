@@ -1,5 +1,5 @@
 export const themes = [
-  { name: "corporate", mode: "any" },
+  { name: "video-game", mode: "any" },
   { name: "manga", mode: "any" },
 ] as const;
 
