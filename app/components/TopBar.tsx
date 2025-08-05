@@ -63,7 +63,7 @@ export default function TopBar() {
                 <Icon icon="formkit:happy" width={22} height={22} style={{ color: '#888' }} />
                 <span style={{ display: "flex", alignItems: "center", marginLeft: 20, fontWeight: 400, fontSize: 14, color: '#888' }}>
                   <Icon icon="material-symbols:refresh" width={16} height={16} style={{ marginRight: 6, color: '#bbb' }} />
-                  Refreshing the page changes the theme!
+                  New theme, new vibe—just&nbsp;<b>refresh!</b>
                 </span>
               </span>
             ))
