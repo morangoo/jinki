@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { themes, ThemeType } from "./themes";
 
 type ThemeContextType = {
@@ -15,22 +15,25 @@ type ThemeProviderProps = {
 };
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
-  function getDeviceMode() {
-    if (typeof window === "undefined") return "any";
-    const width = window.innerWidth;
-    return width <= 768 ? "mobile" : "desktop";
-  }
+  const [theme, setTheme] = useState<ThemeType>(themes[0].name);
 
-  const [theme, setTheme] = useState<ThemeType>(() => {
+  useEffect(() => {
     let mode = "any";
     if (typeof window !== "undefined") {
       const width = window.innerWidth;
       mode = width <= 768 ? "mobile" : "desktop";
+      const filtered = themes.filter(t => t.mode === mode || t.mode === "any");
+      const lastTheme = window.localStorage.getItem("lastTheme");
+      let available = filtered;
+      if (lastTheme) {
+        available = filtered.filter(t => t.name !== lastTheme);
+        if (available.length === 0) available = filtered;
+      }
+      const chosen = available[Math.floor(Math.random() * available.length)].name as ThemeType;
+      setTheme(chosen);
+      window.localStorage.setItem("lastTheme", chosen);
     }
-    const filtered = themes.filter(t => t.mode === mode || t.mode === "any");
-    if (filtered.length === 0) return themes[0].name;
-    return filtered[Math.floor(Math.random() * filtered.length)].name as ThemeType;
-  });
+  }, []);
 
   return (
     <ThemeContext.Provider value={{ theme, setTheme }}>
