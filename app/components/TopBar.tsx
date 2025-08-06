@@ -4,8 +4,7 @@ import React from "react";
 import { Icon } from "@iconify/react";
 import { motion, useAnimationFrame } from "framer-motion";
 
-const items = Array.from({ length: 10 }); 
-
+const items = Array.from({ length: 10 });
 
 export default function TopBar() {
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -13,6 +12,7 @@ export default function TopBar() {
   const [x, setX] = React.useState(0);
   const [visible, setVisible] = React.useState(false);
   const [isClient, setIsClient] = React.useState(false);
+  const [contentWidth, setContentWidth] = React.useState(0);
 
   React.useEffect(() => {
     setIsClient(true);
@@ -26,10 +26,18 @@ export default function TopBar() {
     };
   }, []);
 
+  React.useEffect(() => {
+    if (contentRef.current) {
+      setContentWidth(contentRef.current.offsetWidth / 2);
+    }
+  }, [isClient, visible]);
+
   useAnimationFrame(() => {
     setX((prev) => {
-      const next = prev - 1.2;
-      return next;
+      if (contentWidth && Math.abs(prev) >= contentWidth) {
+        return 0;
+      }
+      return prev - 1.2;
     });
   });
 
@@ -45,6 +53,8 @@ export default function TopBar() {
         boxShadow: "0 1px 4px 0 rgba(0,0,0,0.04)",
         overflow: "hidden",
         position: "sticky",
+        top: 0,
+        zIndex: 1000,
         whiteSpace: "nowrap",
         display: "flex",
         alignItems: "center",
