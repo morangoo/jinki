@@ -5,6 +5,7 @@ html, body {
   margin: 0;
   padding: 0;
   background: #f8fafc;
+  overflow-x: hidden;
 }
 @keyframes spin {
   0% { transform: rotate(0deg);}

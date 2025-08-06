@@ -23,12 +23,12 @@ export default function TopBar() {
     <div
       ref={containerRef}
       style={{
-        width: "100vw",
+        width: "100%",
         height: "32px",
-        background: "#fff",
+        background: "#f9f9f9",
         boxShadow: "0 1px 4px 0 rgba(0,0,0,0.04)",
         overflow: "hidden",
-        position: "relative",
+        position: "sticky",
         whiteSpace: "nowrap",
         display: "flex",
         alignItems: "center",
@@ -47,7 +47,6 @@ export default function TopBar() {
           left: x,
         }}
       >
-        {/* Duas cópias para loop perfeito */}
         {Array(2)
           .fill(null)
           .map((_, j) =>
