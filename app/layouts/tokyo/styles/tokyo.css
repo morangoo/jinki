@@ -1,0 +1,9 @@
+.tokyo-layout {
+    background-color: #030303;
+    min-height: calc(100vh - 32px);
+    box-sizing: border-box;
+    color: #ff4646;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

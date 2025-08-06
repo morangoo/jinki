@@ -1,0 +1,9 @@
+.video-game-layout {
+    background-color: #000000;
+    min-height: calc(100vh - 32px);
+    box-sizing: border-box;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
