@@ -11,6 +11,20 @@ export default function TopBar() {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const contentRef = React.useRef<HTMLDivElement>(null);
   const [x, setX] = React.useState(0);
+  const [visible, setVisible] = React.useState(false);
+  const [isClient, setIsClient] = React.useState(false);
+
+  React.useEffect(() => {
+    setIsClient(true);
+    function checkVisibility() {
+      setVisible(localStorage.getItem("introSeen") === "true");
+    }
+    window.addEventListener("storage", checkVisibility);
+    checkVisibility();
+    return () => {
+      window.removeEventListener("storage", checkVisibility);
+    };
+  }, []);
 
   useAnimationFrame(() => {
     setX((prev) => {
@@ -18,6 +32,8 @@ export default function TopBar() {
       return next;
     });
   });
+
+  if (!isClient || !visible) return null;
 
   return (
     <div
@@ -47,7 +63,6 @@ export default function TopBar() {
           left: x,
         }}
       >
-        {/* Duas cópias para loop perfeito */}
         {Array(2)
           .fill(null)
           .map((_, j) =>
