@@ -13,8 +13,23 @@ export function IntroPage({ onClose }: { onClose: () => void }) {
     onClose();
   };
 
+  const [padding, setPadding] = useState("5%");
+
+  React.useEffect(() => {
+    function updatePadding() {
+      if (window.innerWidth < 600) {
+        setPadding("12%");
+      } else {
+        setPadding("5%");
+      }
+    }
+    updatePadding();
+    window.addEventListener("resize", updatePadding);
+    return () => window.removeEventListener("resize", updatePadding);
+  }, []);
+
   return (
-    <div style={{ height: "100vh", padding: "5%", background: "#121212", color: "white", boxSizing: "border-box"}}>
+    <div style={{ height: "100vh", padding, background: "#121212", color: "white", boxSizing: "border-box"}}>
       <div style={{display: "flex", }}>
         <motion.div
           initial={{ y: -200, opacity: 0 }}
