@@ -1,6 +1,21 @@
 .manga-layout {
-    background-color: black;
+    background-color: #f3f3f3;
     min-height: calc(100vh - 32px);
     box-sizing: border-box;
-    color: white;
+    color: #151515;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
+/*
+    Color Palette:
+    #f3f3f3
+    #d1d1d1
+    #a5a5a5   
+    #686868
+    #414141 
+    #282828
+    #151515
+    #000000
+*/
