@@ -1,0 +1,6 @@
+.manga-layout {
+    background-color: black;
+    min-height: calc(100vh - 32px);
+    box-sizing: border-box;
+    color: white;
+}
